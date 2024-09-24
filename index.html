@@ -74,31 +74,13 @@ function openFullscreen() {
 var elem = document.getElementById("unity-container");
 
 function openFullscreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen().then(() => {
-      // Mengunci orientasi ke landscape setelah masuk fullscreen
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape').catch(err => {
-          console.log("Gagal mengubah orientasi: " + err);
-        });
-      }
-    });
+ 
+    if (elem.requestFullscreen) {
+    elem.requestFullscreen();screen.orientation.lock("landscape-primary");
   } else if (elem.webkitRequestFullscreen) { /* Safari */
-    elem.webkitRequestFullscreen().then(() => {
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape').catch(err => {
-          console.log("Gagal mengubah orientasi: " + err);
-        });
-      }
-    });
+    elem.webkitRequestFullscreen();screen.orientation.lock("landscape-primary");
   } else if (elem.msRequestFullscreen) { /* IE11 */
-    elem.msRequestFullscreen().then(() => {
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape').catch(err => {
-          console.log("Gagal mengubah orientasi: " + err);
-        });
-      }
-    });
+    elem.msRequestFullscreen();screen.orientation.lock("landscape-primary");
   }
 }
 </script>
