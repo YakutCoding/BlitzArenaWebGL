@@ -23,7 +23,7 @@
          
             display:block;
           }
-      
+      #unity-canvas{object-fit:contain}
       
       button {
  padding: 15px 25px;
@@ -146,7 +146,7 @@ function openFullscreen() {
         document.getElementsByTagName('head')[0].appendChild(meta);
         container.className = "unity-mobile";
         canvas.className = "unity-mobile";
-            canvas.style.width = "90%";
+            canvas.style.width = "100%";
         canvas.style.height = "auto";
 
         // To lower canvas resolution on mobile devices to gain some
