@@ -149,7 +149,8 @@ function openFullscreen() {
         document.getElementsByTagName('head')[0].appendChild(meta);
         container.className = "unity-mobile";
         canvas.className = "unity-mobile";
-
+ canvas.style.width = "90%";
+        canvas.style.height = "auto";
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
