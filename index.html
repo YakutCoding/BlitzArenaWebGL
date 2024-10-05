@@ -6,11 +6,71 @@
     <title>Unity WebGL Player | Blitz Arena</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+      /* Default styles (for mobile) */
+      #unity-container, #btnjir {
+        display: block;
+      }
+      #playOnPC {
+        display: none;
+      }
+
+      /* For larger screens (desktop) */
+      @media (min-width: 1024px) {
+        #unity-container, #btnjir {
+          display: none;
+        }
+        #playOnPC {
+          display: block;
+        }
+      }
+
+      button {
+        padding: 15px 25px;
+        border: unset;
+        border-radius: 15px;
+        color: black;
+        z-index: 1;
+        background: white;
+        position: relative;
+        font-weight: 1000;
+        font-size: 17px;
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms;
+        overflow: hidden;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms;
+      }
+
+      button:hover {
+        color: #e8e8e8;
+      }
+
+      button:hover::before {
+        width: 100%;
+      }
+    </style>
   </head>
   <body style="background-color:black">
- <center>  <button id="btnjir" onclick="openFullscreen();"> Play On Fullscreen
-</button></center> 
-    <div id="unity-container" class="unity-desktop">
+    <center>
+      <button id="btnjir" onclick="openFullscreen();" style="display:none;"> Fullscreen </button>
+      <button id="playOnPC" onclick="showGame()"> Play On PC </button>
+    </center>
+    <div id="unity-container" class="unity-desktop" style="display:none;">
       <canvas id="unity-canvas" width=100% height=600% tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -25,108 +85,37 @@
         <div id="unity-build-title">Blitz Arena</div>
       </div>
     </div>
-    <style>
-        #unity-container{
-         
-            display:block;
-          }
-      @media (min-width: 1024px) {
 
-        
-          #unity-container{
-           width:100%;
-            height:100%
-            display:block;
-          }
-         #unity-canvas{
-           width:100%;
-            height:100%
-           display:block;
-          }
-        #button{
-        display:none;}
-     
-      }
-       #unity-container{
-         
-            display:none;
-          }
-       @media (min-width: 1024px) {
-
-        
-          #unity-container{
-           width:100%;
-            height:100%
-            display:block;
-          }
-         #unity-canvas{
-           width:100%;
-            height:100%
-           display:block;
-          }
-        #button{
-        display:none;}
-     
-      }
-      button {
- padding: 15px 25px;
- border: unset;
- border-radius: 15px;
- color:black;
- z-index: 1;
- background:white;
- position: relative;
- font-weight: 1000;
- font-size: 17px;
- -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- transition: all 250ms;
- overflow: hidden;
-  margin-top:15px;margin-bottom:15px;
-}
-
-button::before {
- content: "";
- position: absolute;
- top: 0;
- left: 0;
- height: 100%;
- width: 0;
- border-radius: 15px;
- background-color: #212121;
- z-index: -1;
- -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- transition: all 250ms
-}
-
-button:hover {
- color: #e8e8e8;
-}
-
-button:hover::before {
- width: 100%;
-}</style>
     <script>
-   
-/* Get the element you want displayed in fullscreen mode (a video in this example): */
-var elem = document.getElementById("unity-container");
+      /* Get the element you want displayed in fullscreen mode (the game container): */
+      var elem = document.getElementById("unity-container");
 
-function openFullscreen() {
- document.getElementById("btnjir").style.display="none";   document.getElementById("unity-container").style.display="block";  document.getElementById("unity-container").style.width="100%";
-  document.getElementById("unity-container").style.height="100%";document.getElementById("unity-canvas").style.width="100%";document.getElementById("unity-canvas").style.height="100%";
+      function openFullscreen() {
+        document.getElementById("btnjir").style.display="none";
+        document.getElementById("unity-container").style.width="100%";
+        document.getElementById("unity-container").style.height="100%";
+        document.getElementById("unity-canvas").style.width="100%";
+        document.getElementById("unity-canvas").style.height="100%";
 
-    if (elem.requestFullscreen) {
-    elem.requestFullscreen();screen.orientation.lock("landscape-primary");
-  } else if (elem.webkitRequestFullscreen) { /* Safari */
-    elem.webkitRequestFullscreen();screen.orientation.lock("landscape-primary");
-  } else if (elem.msRequestFullscreen) { /* IE11 */
-    elem.msRequestFullscreen();screen.orientation.lock("landscape-primary");
-  }
-}
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen(); 
+          screen.orientation.lock("landscape-primary");
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+          elem.webkitRequestFullscreen(); 
+          screen.orientation.lock("landscape-primary");
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+          elem.msRequestFullscreen(); 
+          screen.orientation.lock("landscape-primary");
+        }
+      }
 
+      function showGame() {
+        document.getElementById("playOnPC").style.display = "none";
+        document.getElementById("unity-container").style.display = "block";
+        openFullscreen();
+      }
+    </script>
 
-</script>
     <script>
 
       var container = document.querySelector("#unity-container");
@@ -194,7 +183,6 @@ function openFullscreen() {
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
 
-
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
@@ -209,15 +197,15 @@ function openFullscreen() {
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                loadingBar.style.display = "none";
-                fullscreenButton.onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
-              }).catch((message) => {
-                alert(message);
-              });
-            };
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
 
       document.body.appendChild(script);
 
