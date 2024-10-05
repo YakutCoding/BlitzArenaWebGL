@@ -10,7 +10,7 @@
   <body style="background-color:black">
  <center>  <button id="btnjir" onclick="openFullscreen();"> FullScreen
 </button></center> 
-    <div id="unity-container" class="unity-desktop" width=50% height=30%>
+    <div id="unity-container" class="unity-desktop" width=700px height=500px>
       <canvas id="unity-canvas" width=700px height=500px tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -155,8 +155,8 @@ function openFullscreen() {
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
+//        canvas.style.width = "100%";
+   //     canvas.style.height = "100%";
       }
 
       loadingBar.style.display = "block";
